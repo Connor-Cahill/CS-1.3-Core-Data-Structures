@@ -1,6 +1,7 @@
 #!python
 
 import string
+import math
 # Hint: Use these string constants to encode/decode hexadecimal digits and more
 # string.digits is '0123456789'
 # string.hexdigits is '0123456789abcdefABCDEF'
@@ -8,6 +9,9 @@ import string
 # string.ascii_uppercase is 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 # string.ascii_letters is ascii_lowercase + ascii_uppercase
 # string.printable is digits + ascii_letters + punctuation + whitespace
+string_to_int = string.digits + string.ascii_lowercase
+
+str_to_int_dict = {k: v for k, v in enumerate(string_to_int)}
 
 
 def decode(digits: str, base: int) -> int:
@@ -17,14 +21,13 @@ def decode(digits: str, base: int) -> int:
     return: int -- integer representation of number (in base 10)"""
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
-    # TODO: Decode digits from binary (base 2)
-    # TODO: Decode digits from hexadecimal (base 16)
-    # ...
-    # TODO: Decode digits from any base (2 up to 36)
-    # turn digits into int
-    num = int(digits)
-    while num is not 0:
-
+    # reverse the digits
+    digits = reversed(digits)
+    # decimal sum that will be returned 
+    dec_sum = 0
+    for i, v in enumerate(digits):
+        temp_sum += (i**base) * (str_to_int_dict[v])
+    return temp_sum
 
 
 def encode(number: int, base: int) -> str:
@@ -36,13 +39,22 @@ def encode(number: int, base: int) -> str:
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
-    # TODO: Encode number in binary (base 2)
-    # ...
-    # TODO: Encode number in hexadecimal (base 16)
-    # ...
-    # TODO: Encode number in any base (2 up to 36)
-    # ...
-
+    # number to be returned
+    new_base = ''
+    # num var that will be subtractd from
+    num = number
+    while num is not 0:
+        # find largest whole number log smaller than number
+        temp_num = math.floor(math.log(num, base))
+        print('Temp Num: ', temp_num)
+        new_base += str(temp_num)
+        # subtract from number
+        num -= base**temp_num
+        print('this is num: ', num)
+    return new_base
+        
+      
+    
 
 def convert(digits: str, base1: int, base2: int) -> str:
     """Convert given digits in base1 to digits in base2.
@@ -80,4 +92,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    print(encode(12, 2))

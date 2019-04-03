@@ -10,7 +10,7 @@ import string
 # string.printable is digits + ascii_letters + punctuation + whitespace
 
 
-def decode(digits, base):
+def decode(digits: str, base: int) -> int:
     """Decode given digits in given base to number in base 10.
     digits: str -- string representation of number (in given base)
     base: int -- base of given number
@@ -18,14 +18,16 @@ def decode(digits, base):
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # TODO: Decode digits from binary (base 2)
-    # ...
     # TODO: Decode digits from hexadecimal (base 16)
     # ...
     # TODO: Decode digits from any base (2 up to 36)
-    # ...
+    # turn digits into int
+    num = int(digits)
+    while num is not 0:
 
 
-def encode(number, base):
+
+def encode(number: int, base: int) -> str:
     """Encode given number in base 10 to digits in given base.
     number: int -- integer representation of number (in base 10)
     base: int -- base to convert to
@@ -42,7 +44,7 @@ def encode(number, base):
     # ...
 
 
-def convert(digits, base1, base2):
+def convert(digits: str, base1: int, base2: int) -> str:
     """Convert given digits in base1 to digits in base2.
     digits: str -- string representation of number (in base1)
     base1: int -- base of given number

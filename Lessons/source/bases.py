@@ -9,9 +9,9 @@ import math
 # string.ascii_uppercase is 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 # string.ascii_letters is ascii_lowercase + ascii_uppercase
 # string.printable is digits + ascii_letters + punctuation + whitespace
-string_to_int = string.digits + string.ascii_lowercase
+int_to_string = string.digits + string.ascii_lowercase
 
-str_to_int_dict = {k: v for k, v in enumerate(string_to_int)}
+str_to_int = {string: index for index, string in enumerate(int_to_string)}
 
 
 def decode(digits: str, base: int) -> int:
@@ -21,13 +21,13 @@ def decode(digits: str, base: int) -> int:
     return: int -- integer representation of number (in base 10)"""
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
-    # reverse the digits
-    digits = reversed(digits)
     # decimal sum that will be returned 
     dec_sum = 0
-    for i, v in enumerate(digits):
-        temp_sum += (i**base) * (str_to_int_dict[v])
-    return temp_sum
+    # i = index and v = value
+    for i, v in enumerate(reversed(digits)):
+        dec_sum += (base**i) * str_to_int[v]
+        print('Dec Sum ', dec_sum)
+    return dec_sum
 
 
 def encode(number: int, base: int) -> str:
@@ -41,16 +41,23 @@ def encode(number: int, base: int) -> str:
     assert number >= 0, 'number is negative: {}'.format(number)
     # number to be returned
     new_base = ''
-    # num var that will be subtractd from
-    num = number
-    while num is not 0:
-        # find largest whole number log smaller than number
-        temp_num = math.floor(math.log(num, base))
-        print('Temp Num: ', temp_num)
-        new_base += str(temp_num)
-        # subtract from number
-        num -= base**temp_num
-        print('this is num: ', num)
+    # find largest whole number log smaller than number
+    if number > 0:
+        lg_power = math.floor(math.log(number, base))
+    else:
+        return '0'
+    # looping backwards (-1 for 3rd arg) including 0 (-1 for 2nd arg)
+    for i in range(lg_power, -1, -1):
+        # check if base to power of temp_num less than number
+        if base**i <= number:
+            # create number to add to return val 
+            temp_num = number // (base**i)
+            # sutbract temp number from number
+            number -= temp_num * (base**i) 
+            new_base += int_to_string[temp_num]
+        else:
+            # add 0 to output string
+            new_base += '0'
     return new_base
         
       
@@ -65,14 +72,8 @@ def convert(digits: str, base1: int, base2: int) -> str:
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base1 <= 36, 'base1 is out of range: {}'.format(base1)
     assert 2 <= base2 <= 36, 'base2 is out of range: {}'.format(base2)
-    # TODO: Convert digits from base 2 to base 16 (and vice versa)
-    # ...
-    # TODO: Convert digits from base 2 to base 10 (and vice versa)
-    # ...
-    # TODO: Convert digits from base 10 to base 16 (and vice versa)
-    # ...
-    # TODO: Convert digits from any base to any base (2 up to 36)
-    # ...
+    # decode digits, base1 into binary, then encode into given base
+    return encode(decode(digits, base1), base2)
 
 
 def main():
@@ -93,4 +94,4 @@ def main():
 
 if __name__ == '__main__':
     # main()
-    print(encode(12, 2))
+    print(decode('10', 10))

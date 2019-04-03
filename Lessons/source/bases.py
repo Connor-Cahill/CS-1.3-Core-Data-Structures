@@ -15,26 +15,19 @@ str_to_int = {string: index for index, string in enumerate(int_to_string)}
 
 
 def decode(digits: str, base: int) -> int:
-    """Decode given digits in given base to number in base 10.
-    digits: str -- string representation of number (in given base)
-    base: int -- base of given number
-    return: int -- integer representation of number (in base 10)"""
+    """Decode given digits in given base to number in base 10. """
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
-    # decimal sum that will be returned 
+    # decimal sum that will be returned
     dec_sum = 0
     # i = index and v = value
     for i, v in enumerate(reversed(digits)):
         dec_sum += (base**i) * str_to_int[v]
-        print('Dec Sum ', dec_sum)
     return dec_sum
 
 
 def encode(number: int, base: int) -> str:
-    """Encode given number in base 10 to digits in given base.
-    number: int -- integer representation of number (in base 10)
-    base: int -- base to convert to
-    return: str -- string representation of number (in given base)"""
+    """Encode given number in base 10 to digits in given base."""
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # Handle unsigned numbers only for now
@@ -50,25 +43,19 @@ def encode(number: int, base: int) -> str:
     for i in range(lg_power, -1, -1):
         # check if base to power of temp_num less than number
         if base**i <= number:
-            # create number to add to return val 
+            # create number to add to return val
             temp_num = number // (base**i)
             # sutbract temp number from number
-            number -= temp_num * (base**i) 
+            number -= temp_num * (base**i)
             new_base += int_to_string[temp_num]
         else:
             # add 0 to output string
             new_base += '0'
     return new_base
-        
-      
-    
+
 
 def convert(digits: str, base1: int, base2: int) -> str:
-    """Convert given digits in base1 to digits in base2.
-    digits: str -- string representation of number (in base1)
-    base1: int -- base of given number
-    base2: int -- base to convert to
-    return: str -- string representation of number (in base2)"""
+    """Convert given digits in base1 to digits in base2."""
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base1 <= 36, 'base1 is out of range: {}'.format(base1)
     assert 2 <= base2 <= 36, 'base2 is out of range: {}'.format(base2)

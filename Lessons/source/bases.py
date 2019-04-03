@@ -1,5 +1,13 @@
 #!python
 
+"""
+Bases.py contains function for converting and working with bases.
+
+Decode: takes in number and converts to base 10
+Encode: takes in number in base 10 and converts to another base
+Convert: converts number from 1 base to another base
+"""
+
 import string
 import math
 # Hint: Use these string constants to encode/decode hexadecimal digits and more
@@ -15,7 +23,7 @@ str_to_int = {string: index for index, string in enumerate(int_to_string)}
 
 
 def decode(digits: str, base: int) -> int:
-    """Decode given digits in given base to number in base 10. """
+    """Decode given digits in given base to number in base 10."""
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # decimal sum that will be returned

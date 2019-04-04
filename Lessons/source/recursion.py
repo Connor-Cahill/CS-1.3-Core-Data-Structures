@@ -9,14 +9,20 @@ def factorial(n):
     # implement factorial_iterative and factorial_recursive below, then
     # change this to call your implementation to verify it passes all tests
     # return factorial_iterative(n)
-    return factorial_recursive(n)
+    return factorial_iterative(n)
 
 
-def factorial_iterative(n):
-    # TODO: implement the factorial function iteratively here
-    pass
-    # once implemented, change factorial (above) to call factorial_iterative
-    # to verify that your iterative implementation passes all tests
+def factorial_iterative(n: int) -> int:
+    """factorial(n) returns the product of the ints 1 through n."""
+    # factorial(1 or 0) always returns 1
+    if n == 0 or n == 1:
+        return 1
+    # return value starts at 1 b/c multiply by 0 would be 0
+    total = 1
+    while n > 1:
+        total = total * n
+        n -= 1
+    return total
 
 
 def factorial_recursive(n):

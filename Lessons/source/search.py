@@ -32,32 +32,43 @@ def binary_search(array, item):
     """return the index of item in sorted array or None if item is not found"""
     # implement binary_search_iterative and binary_search_recursive below, then
     # change this to call your implementation to verify it passes all tests
-    # return binary_search_iterative(array, item)
-    return binary_search_recursive(array, item)
+    return binary_search_iterative(array, item)
+    # return binary_search_recursive(array, item)
 
 
 def binary_search_iterative(array, item):
-    """return index of item in sorted array or None if item is not found"""
-    # start index at mid index of array
-    index = len(array) // 2
-    print(index)
-    while len(array) > 0:
-        # index contains item
-        if array[index] == item:
-            return index
-        # check if item in index is larger than item
-        elif array[index] > item:
-            # cut off greater half of array
-            array = array[:index - 1]
-        # check if item in index is less than item
-        elif array[index] < item:
-            # cut off smaller half of arr
-            array = array[index + 1:]
-        # reset the index to mid point
-        index = len(array) // 2
-        print(index)
-    # item not found
-    return None
+    """Return index of item in sorted array or None if item is not found."""
+    # set large and small pointers (each end of arr)
+    small = 0
+    large = len(array) - 1
+    # while pointers are not the same
+    while small != large:
+        # set middle index
+        mid = (small + large) // 2
+        # check if item is at mid index
+        if array[mid] == item:
+            return mid
+        # check if item in index greater than item
+        elif array[mid] > item:
+            # check if more to search
+            if mid == small:
+                return None
+            # update large index
+            large = mid - 1
+        # check if item at index less than item
+        elif array[mid] < item:
+            # check if more array to search
+            if mid == large:
+                return None
+            # update small index
+            small = mid + 1
+    # check if last item is item
+    if array[large] == item:
+        return large
+    # item not in list
+    else:
+        return None
+
 
 
 def binary_search_recursive(array, item, left=None, right=None):
@@ -89,12 +100,14 @@ def binary_search_recursive(array, item, left=None, right=None):
         # nothing left to search
         if left == mid:
             return None
+        # change right to middle index - 1
         return binary_search_recursive(array, item, left, mid - 1)
     # check if item at index less than
     elif array[mid] < item:
         # nothing left to search
         if right == mid:
             return None
+        # change left to middle index + 1
         return binary_search_recursive(array, item, mid + 1, right)
 
 

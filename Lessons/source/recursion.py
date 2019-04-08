@@ -20,7 +20,7 @@ def factorial_iterative(n: int) -> int:
     # return value starts at 1 b/c multiply by 0 would be 0
     total = 1
     while n > 1:
-        total = total * n
+        total *= n
         n -= 1
     return total
 

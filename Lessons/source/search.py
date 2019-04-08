@@ -19,14 +19,13 @@ def linear_search_iterative(array, item):
 def linear_search_recursive(array: [int], item: int, index=0) -> (int, None):
     """Searches for given item in array returns 1st indx of item."""
     # base case: index out of range
-    if index == len(array):
+    if index >= len(array):
         return None
     # base case: arr at index is item
-    elif array[index] == item:
+    if array[index] == item:
         return index
-    else:
-        # keep looking for item
-        return linear_search_recursive(array, item, index + 1)
+    # keep looking for item
+    return linear_search_recursive(array, item, index + 1)
 
 def binary_search(array, item):
     """return the index of item in sorted array or None if item is not found"""

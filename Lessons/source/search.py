@@ -69,11 +69,8 @@ def binary_search_iterative(array, item):
         return None
 
 
-
 def binary_search_recursive(array, item, left=None, right=None):
     """Return index of item in sorted array or none if item not found."""
-    print('left: ', left)
-    print('right: ', right)
     # BASE CASE: left and right point to same index
     if left == right and left is not None:
         # not in array
@@ -110,5 +107,3 @@ def binary_search_recursive(array, item, left=None, right=None):
         return binary_search_recursive(array, item, mid + 1, right)
 
 
-if __name__ == '__main__':
-    print(binary_search_recursive(['Alex', 'Brian', 'Julia', 'Kojin', 'Nabil', 'Nick', 'Winnie'], 'Winnie'))

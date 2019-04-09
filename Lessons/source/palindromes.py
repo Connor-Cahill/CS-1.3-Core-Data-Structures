@@ -19,9 +19,32 @@ def is_palindrome(text):
 
 def is_palindrome_iterative(text):
     # TODO: implement the is_palindrome function iteratively here
-    pass
     # once implemented, change is_palindrome to call is_palindrome_iterative
     # to verify that your iterative implementation passes all tests
+    # index for iterating backwards through string
+    backwards = len(text) - 1
+    # index for iterating forward through string
+    forwards = 0
+    while backwards > forwards:
+        # check that the items are letters
+        # if not skip items until is letter
+        if not text[forwards].isalpha():
+            while not text[forwards].isalpha():
+                forwards += 1
+        if not text[backwards].isalpha():
+            while not text[backwards].isalpha():
+                backwards -= 1
+        # the pointers have crossed
+        # all items in list have been touched
+        if backwards <= forwards:
+            break
+        if text[backwards].lower() != text[forwards].lower():
+            # items dont match up, text not palindrone
+            return False
+        # change our index counters
+        forwards += 1
+        backwards -= 1
+    return True
 
 
 def is_palindrome_recursive(text, left=None, right=None):

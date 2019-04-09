@@ -25,7 +25,7 @@ def factorial_iterative(n: int) -> int:
     return total
 
 
-def factorial_recursive(n):
+def factorial_recursive(n: int) -> int:
     # check if n is one of the base cases
     if n == 0 or n == 1:
         return 1

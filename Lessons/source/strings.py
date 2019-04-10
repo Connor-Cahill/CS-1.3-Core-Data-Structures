@@ -1,6 +1,7 @@
 #!python
 from collections import deque
 
+
 def contains(text: str, pattern: str) -> bool:
     """Return a boolean indicating whether pattern occurs in text."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
@@ -35,12 +36,16 @@ def find_index(text: str, pattern: str) -> (int, None):
     or None if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
+    # edge case: pattern is longer text than text
+    if len(pattern) > len(text):
+        return None
     # edge case: patten is empty string
     if len(pattern) == 0:
         return 0
-    # edge case: pattern is longer text than text
-    if len(pattern) == len(text):
-        return None
+    # case: pattern equals text:
+    # pattern is in text and starting index would be 0
+    if pattern == text:
+        return 0
     # keeps track of start index and will be returned value
     start_index = ''
     # keeps track of matched letters between pattern and text
@@ -49,6 +54,7 @@ def find_index(text: str, pattern: str) -> (int, None):
         if letter == pattern[len(matched)]:
             if len(matched) == 0:
                 start_index = i
+                print('Start: ', start_index)
             matched += letter
         else:
             matched = ''
@@ -88,10 +94,8 @@ def find_all_indexes(text, pattern):
 def test_string_algorithms(text, pattern):
     found = contains(text, pattern)
     print('contains({!r}, {!r}) => {}'.format(text, pattern, found))
-    # TODO: Uncomment these lines after you implement find_index
     index = find_index(text, pattern)
     print('find_index({!r}, {!r}) => {}'.format(text, pattern, index))
-    # TODO: Uncomment these lines after you implement find_all_indexes
     indexes = find_all_indexes(text, pattern)
     print('find_all_indexes({!r}, {!r}) => {}'.format(text, pattern, indexes))
 
@@ -115,4 +119,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    test_string_algorithms('abc', 'abc')

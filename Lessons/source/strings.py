@@ -31,7 +31,7 @@ def contains(text: str, pattern: str) -> bool:
             return True
     return False
 
-def find_index(text: str, pattern: str) -> (int, None):
+def find_index(text: str, pattern: str, start=0) -> (int, None):
     """Return the starting index of the first occurrence of pattern in text,
     or None if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
@@ -45,16 +45,17 @@ def find_index(text: str, pattern: str) -> (int, None):
     # case: pattern equals text:
     # pattern is in text and starting index would be 0
     if pattern == text:
-        return 0
+        return start
     # keeps track of start index and will be returned value
     start_index = ''
     # keeps track of matched letters between pattern and text
     matched = ''
-    for i, letter in enumerate(text):
+    for i in range(start, len(text)):
+        letter = text[i]
         if letter == pattern[len(matched)]:
+            # matched is empty, this is currently start_index
             if len(matched) == 0:
                 start_index = i
-                print('Start: ', start_index)
             matched += letter
         else:
             matched = ''
@@ -77,18 +78,28 @@ def find_all_indexes(text, pattern):
     # and returned value from find_index
     start_indexes = []
     found_index = ''
+    # check if text is same as pattern
+    if text == pattern:
+        return [0]
     # edge case: pattern is empty
-    if len(pattern) == 0:
-        return [i for i in range(len(pattern))]
-    while found_index is not None or found_index != len(text) - 1: 
-        found_index = find_index(text, pattern)
+    if pattern == found_index:
+        return [i for i in range(len(text))]
+    start = 0
+    # call out find_index function and slice the text inputted
+    while found_index is not None or found_index != len(text) - (len(pattern) - 1): 
+        found_index = find_index(text, pattern, start)
         if found_index is not None:
+            # turns index back into index from OG text
+            # by using length of pattern and start_indexes
+            # (to tell us how many times list was sliced)
             start_indexes.append(found_index)
-            text = text[found_index + 1:]
+            # make sure there is more text to keep checking
+            if found_index == len(text) - (len(pattern) - 1):
+                return start_indexes
+            start = found_index + 1
         else:
             break
     return start_indexes
-
 
 
 def test_string_algorithms(text, pattern):

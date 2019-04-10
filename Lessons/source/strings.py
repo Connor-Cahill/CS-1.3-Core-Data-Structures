@@ -10,7 +10,7 @@ def contains(text: str, pattern: str) -> bool:
     matched = ''
     # if pattern is larger than text
     # raise error. incorrect inputs
-    if len(pattern) > len(text): 
+    if len(pattern) > len(text):
         raise ValueError("pattern cannot be larger than text inputs")
     # edge case: empty string
     if len(pattern) == 0:
@@ -85,13 +85,11 @@ def find_all_indexes(text, pattern):
     if pattern == found_index:
         return [i for i in range(len(text))]
     start = 0
-    # call out find_index function and slice the text inputted
-    while found_index is not None or found_index != len(text) - (len(pattern) - 1): 
+    # loop until item returned from find_index function is none
+    # or we find the word
+    while found_index is not None: 
         found_index = find_index(text, pattern, start)
         if found_index is not None:
-            # turns index back into index from OG text
-            # by using length of pattern and start_indexes
-            # (to tell us how many times list was sliced)
             start_indexes.append(found_index)
             # make sure there is more text to keep checking
             if found_index == len(text) - (len(pattern) - 1):

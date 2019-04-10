@@ -1,11 +1,35 @@
 #!python
+from collections import deque
 
-def contains(text, pattern):
+def contains(text: str, pattern: str) -> bool:
     """Return a boolean indicating whether pattern occurs in text."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement contains here (iteratively and/or recursively)
-
+    # matched keeps track of matched letters
+    matched = ''
+    # if pattern is larger than text
+    # raise error. incorrect inputs
+    if len(pattern) > len(text): 
+        raise ValueError("pattern cannot be larger than text inputs")
+    # edge case: empty string
+    if len(pattern) == 0:
+        return True
+    # loop over text to compare letter to
+    # letter in pattern
+    for letter in text:
+        if letter == pattern[len(matched)]:
+            matched += letter
+        else:
+            matched = ''
+            # check if letter matched first letter in pattern
+            if letter == pattern[len(matched)]:
+                matched += letter
+        print('matched: ', matched)
+        # if matched is equal to pattern
+        # the pattern was in the text
+        if matched == pattern:
+            return True
+    return False
 
 def find_index(text, pattern):
     """Return the starting index of the first occurrence of pattern in text,

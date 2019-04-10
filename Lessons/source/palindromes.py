@@ -29,11 +29,11 @@ def is_palindrome_iterative(text):
         # check that the items are letters
         # if not skip items until is letter
         if not text[forwards].isalpha():
-            while not text[forwards].isalpha():
-                forwards += 1
+            forwards += 1
+            continue
         if not text[backwards].isalpha():
-            while not text[backwards].isalpha():
-                backwards -= 1
+            backwards -= 1
+            continue
         # the pointers have crossed
         # all items in list have been touched
         if backwards <= forwards:

@@ -18,7 +18,6 @@ def is_palindrome(text):
 
 
 def is_palindrome_iterative(text):
-    # TODO: implement the is_palindrome function iteratively here
     # once implemented, change is_palindrome to call is_palindrome_iterative
     # to verify that your iterative implementation passes all tests
     # index for iterating backwards through string
@@ -33,7 +32,6 @@ def is_palindrome_iterative(text):
             continue
         if not text[backwards].isalpha():
             backwards -= 1
-            continue
         # the pointers have crossed
         # all items in list have been touched
         if backwards <= forwards:

@@ -1,6 +1,7 @@
 #!python
 
 from linkedlist import LinkedList
+from linkedlist import Node
 
 
 # Implement LinkedQueue below, then change the assignment at the bottom
@@ -46,7 +47,6 @@ class LinkedQueue(object):
             # set the old tail's next to point towards new tail
             current_tail.next = new_tail
         else: # queue was empty:
-
             # when queue is empty we need to
             # add the new item as the head and tail of our queue
             self.head = new_tail
@@ -55,14 +55,21 @@ class LinkedQueue(object):
     def front(self):
         """Return the item at the front of this queue without removing it,
         or None if this queue is empty."""
-        # TODO: Return front item, if any
-
+        # head is the front most node in queue
+        return self.head.data  if not self.is_empty() else None
     def dequeue(self):
         """Remove and return the item at the front of this queue,
         or raise ValueError if this queue is empty.
         Running time: O(???) – Why? [TODO]"""
-        # TODO: Remove and return front item, if any
-
+        # check if queue is empty
+        if not self.is_empty():
+            current_head = self.head
+            # shift head to the next node in quueue (will be None if nothing)
+            self.head = current_head.next
+            self.size -= 1 # decrement size counter
+            return current_head.data # item that was just removed
+        else: # queue is empty
+            raise ValueError('Cannot dequeue item because queue is empty')
 
 # Implement ArrayQueue below, then change the assignment at the bottom
 # to use this Queue implementation to verify it passes all tests

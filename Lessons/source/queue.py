@@ -12,12 +12,6 @@ class LinkedQueue(object):
         """Initialize this queue and enqueue the given items, if any."""
         # Initialize a new linked list to store the items
         self.list = LinkedList()
-        # holds count of how many elements are in queue 
-        # (keeps length method constant)
-        self.size = 0
-        # set head and tail of Queue
-        self.head = None
-        self.tail = None
         if iterable is not None:
             for item in iterable:
                 self.enqueue(item)
@@ -28,50 +22,42 @@ class LinkedQueue(object):
 
     def is_empty(self):
         """Return True if this queue is empty, or False otherwise."""
-        return self.head is None  # returns true if nothing is in head
+        return self.list.is_empty()  # uses linkedlist is_empty method
 
     def length(self):
         """Return the number of items in this queue."""
-        return self.size  # returns value of queue's size property
+        return self.list.length()  # use linkedlists length method
 
     def enqueue(self, item):
-        """Insert the given item at the back of this queue.
-        Running time: O(???) – Why? [TODO]"""
-        # create new node with given item
-        new_tail = Node(item)
-        self.size += 1  # increment size counter
-        # check that list is not empty
-        if not self.is_empty():
-            # grab current tail in queue
-            current_tail = self.tail
-            self.tail = new_tail
-            # set the old tail's next to point towards new tail
-            current_tail.next = new_tail
-        else:  # queue was empty:
-            # when queue is empty we need to
-            # add the new item as the head and tail of our queue
-            self.head = new_tail
-            self.tail = new_tail
+        """
+        Insert the given item at the back of this queue.
+        Running time: O(1) – b/c our linked list has a tail pointer so
+        appending is constant [TODO]
+        """
+        self.list.append(item)  # use linked list append method to add to end
 
     def front(self):
         """Return the item at the front of this queue without removing it,
         or None if this queue is empty."""
-        # head is the front most node in queue
-        return self.head.data if not self.is_empty() else None
+        # returns the head of list and uses linked list is_empty method to
+        # check if list is empty, if it is returns None
+        return self.list.head if not self.list.is_empty() else None
 
     def dequeue(self):
         """Remove and return the item at the front of this queue,
         or raise ValueError if this queue is empty.
         Running time: O(???) – Why? [TODO]"""
-        # check if queue is empty
-        if not self.is_empty():
-            current_head = self.head
-            # shift head to the next node in quueue (will be None if nothing)
-            self.head = current_head.next
-            self.size -= 1  # decrement size counter
-            return current_head.data  # item that was just removed
-        else:  # queue is empty
-            raise ValueError('Cannot dequeue item because queue is empty')
+        # check if queue is empty and throw error
+        if self.list.is_empty():
+            raise ValueError('Queue is empty')
+ 
+        # grab value of head in linked list
+        # and then use linked list delete method
+        # on head node
+        popped_item = self.list.head.data  # item to be dequeued
+        self.list.delete(popped_item)
+        return popped_item  # return dequeued item
+
 
 # Implement ArrayQueue below, then change the assignment at the bottom
 # to use this Queue implementation to verify it passes all tests

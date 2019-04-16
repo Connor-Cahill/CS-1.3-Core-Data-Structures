@@ -21,11 +21,12 @@ class LinkedStack(object):
 
     def is_empty(self):
         """Return True if this stack is empty, or False otherwise."""
-        return self.list.is_empty() # uses linkedlist is_empty() method
+        return self.list.is_empty()  # uses linkedlist is_empty() method
 
     def length(self):
         """Return the number of items in this stack."""
-        return self.list.length() # uses linked list length method to return size property
+        # uses linked list length method to return size property
+        return self.list.length()
 
     def push(self, item):
         """Insert the given item on the top of this stack.
@@ -50,9 +51,8 @@ class LinkedStack(object):
             # use linkedlist delete method to remove item
             self.list.delete(popped_item.data)
             return popped_item.data
-        else: # stack is empty, raise value error
+        else:  # stack is empty, raise value error
             raise ValueError('cannot pop from stack because stack is empty')
-
 
 
 # Implement ArrayStack below, then change the assignment at the bottom
@@ -73,30 +73,46 @@ class ArrayStack(object):
 
     def is_empty(self):
         """Return True if this stack is empty, or False otherwise."""
-        # TODO: Check if empty
+        # if length of list is 0 (its empty) return true
+        return len(self.list) == 0
 
     def length(self):
         """Return the number of items in this stack."""
-        # TODO: Count number of items
+        return len(self.list)  # use lists length method
 
     def push(self, item):
-        """Insert the given item on the top of this stack.
-        Running time: O(???) – Why? [TODO]"""
-        # TODO: Insert given item
+        """
+        Insert the given item on the top of this stack.
+        Running time: O(1) – appending to the end of a list is constant time
+        """
+        # Note: we are using the end of the list as the "top of stack"
+        # this is b/c prepending is too expensive for use of stack
+        self.list.append(item)  # append to end of list
 
     def peek(self):
         """Return the item on the top of this stack without removing it,
         or None if this stack is empty."""
-        # TODO: Return top item, if any
+        # using index of -1 b/c we are using the 
+        # end of the list as top of stack
+        return self.list[-1] if not self.is_empty() else None
 
     def pop(self):
-        """Remove and return the item on the top of this stack,
+        """
+        Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
-        Running time: O(???) – Why? [TODO]"""
-        # TODO: Remove and return top item, if any
+        Running time: O(1) - b/c popping from end of list is constant time
+        """
+        # check if stack is empty and raise error
+        if self.is_empty():
+            raise ValueError('cannot pop because stack is empty')
+        # grab value of item at end of list and pop it
+        # note using end of list as top of stack
+        popped_item = self.list[-1]
+        self.list.pop()
+        return popped_item  # item just deleted from stack
 
 
 # Implement LinkedStack and ArrayStack above, then change the assignment below
 # to use each of your Stack implementations to verify they each pass all tests
-Stack = LinkedStack
-# Stack = ArrayStack
+# Stack = LinkedStack
+Stack = ArrayStack

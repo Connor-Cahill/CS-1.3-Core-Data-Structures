@@ -84,6 +84,7 @@ class LinkedList(object):
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index <= self.size):
             raise ValueError('List index out of range: {}'.format(index))
+
         # edge case: index is 0
         # prepending to linked list
         if index == 0:
@@ -91,27 +92,22 @@ class LinkedList(object):
             # assign to head and tail
             self.prepend(item)
             return
+
         # edge case: index is len(list) (appending)
         if index == self.size:
             self.append(item)
             return  # item added end function
-            if self.is_empty():
-                self.tail = node
-            self.head = node
-            self.size += 1
-            return
-        # node item to iterate though linked list
-        if not self.is_empty():
-            node = self.head
-        else:
-            if index != 0:
-                raise ValueError("index out of range")
+
+        # grab first node in list
+        node = self.head
+
         # loop range of index to
         # keep grabbing next node in list
         for _ in range(index):
             if node.next is None:
                 raise ValueError("Index out of range")
             node = node.next
+
         # create new node and shift pointers
         # new_node should point to current nodes next
         # current node (node var) will point to new node
@@ -179,25 +175,21 @@ class LinkedList(object):
         using the same node, or raise ValueError if old_item is not found.
         Best case running time: ??? under what conditions? [TODO]
         Worst case running time: ??? under what conditions? [TODO]"""
-        # init var to keep track of current node
-        # starts at head if list not empty
-        if not self.is_empty():
-            node = self.head
-        else:
-            raise ValueError("Item not in linked list")
-        while node.next is not None:
+        # grab first node in linked list 
+        node = self.head
+
+        # move through linked list until the node is nothing
+        while node is not None:
             # check if node is old item 
             # replace item if yes
             if node.data == old_item:
                 node.data = new_item
-                return
+                return # end function (everything done)
+
             # grab next node
             node = node.next
-        # check if last node contains old item
-        if node.data == old_item:
-            node.data = new_item
-            return
-        raise ValueError("Item not in linked list")
+
+        raise ValueError("Item: {} not in linked list".format(old_item))
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.

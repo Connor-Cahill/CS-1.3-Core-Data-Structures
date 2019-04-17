@@ -6,11 +6,13 @@ def contains(text: str, pattern: str) -> bool:
     """Return a boolean indicating whether pattern occurs in text."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
+    # COMPLEXITY: O(n) b/c we are using find_index method which is O(n)
     return find_index(text, pattern) is not None
 
 def find_index(text: str, pattern: str, start=0) -> (int, None):
     """Return the starting index of the first occurrence of pattern in text,
     or None if not found."""
+    #COMPLEXITY: O(n) b/c we have to iterate over string to find pattern
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # edge case: pattern is longer text than text
@@ -49,6 +51,7 @@ def find_index(text: str, pattern: str, start=0) -> (int, None):
 def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,
     or an empty list if not found."""
+    # COMPLEXITY: O(n) b/c we have to traverse string to find all matching patterns
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # vars to keep track of start_indexes
@@ -64,7 +67,7 @@ def find_all_indexes(text, pattern):
     start = 0
     # loop until item returned from find_index function is none
     # or we find the word
-    while found_index is not None: 
+    while found_index is not None:
         found_index = find_index(text, pattern, start)
         if found_index is not None:
             start_indexes.append(found_index)

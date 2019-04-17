@@ -123,3 +123,67 @@ class ArrayQueue(object):
 # to use each of your Queue implementations to verify they each pass all tests
 # Queue = LinkedQueue
 Queue = ArrayQueue
+
+
+### deque implementation
+
+class Deque:
+
+    def __init__(self, items=None):
+        """
+        initializes a Deque with items if any are given.
+        If items are given they are populated into Deque with
+        push_front method (loading in front by default)
+        """
+        # initialize linked list for our deque to use
+        self.list = LinkedList()
+
+        # build are deque
+        if items is not None:
+            for item in items:
+                self.push_front(item)
+
+    def push_front(item):
+        """
+        Takes in given item and prepends it
+        to the front of the deque
+        """
+        # use linked list prepend method
+        self.list.prepend(item)
+
+    def push_back(item):
+        """
+        Takes an item as parameter and appends it
+        to the back of the deque
+        """
+        # uses linked list append method
+        self.list.append(item)
+
+    def pop_front():
+        """
+        Removes the item at front of deque
+        and returns it
+        """
+        # grab item to be popped/returned
+        popped_item = self.list.head
+
+        # remove from left side of list using linkedlist delete method
+        # note: this is still constant b/c popped_item is first item in linkedlist
+        self.list.delete(popped_item)
+
+        return popped_item # returning item that was just deleted
+
+    def pop_back():
+        """
+        Removes the item at the end of deque
+        and returns its value
+        """
+        # grab item to be removed (tail of linked list)
+        popped_item = self.list.tail
+
+        # remove item from right side
+        # NOTE: this could be much better with doubly linked list
+        # currently O(n)
+        self.list.delete(popped_item)
+
+

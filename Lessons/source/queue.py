@@ -1,7 +1,7 @@
 #!python
 
 from linkedlist import LinkedList
-from linkedlist import Node
+from doublylinkedlist import DoublyLinkedList
 
 
 # Implement LinkedQueue below, then change the assignment at the bottom
@@ -136,7 +136,7 @@ class Deque:
         push_front method (loading in front by default)
         """
         # initialize linked list for our deque to use
-        self.list = LinkedList()
+        self.list = DoublyLinkedList()
 
         # build are deque
         if items is not None:
@@ -182,7 +182,6 @@ class Deque:
         popped_item = self.list.tail
 
         # remove item from right side
-        # TODO: this could be much better with doubly linked list
         # currently O(n)
         self.list.delete(popped_item)
 

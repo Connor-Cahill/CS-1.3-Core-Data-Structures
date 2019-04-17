@@ -171,7 +171,7 @@ class Deque:
         # note: this is still constant b/c popped_item is first item in linkedlist
         self.list.delete(popped_item)
 
-        return popped_item # returning item that was just deleted
+        return popped_item  # returning item that was just deleted
 
     def pop_back():
         """

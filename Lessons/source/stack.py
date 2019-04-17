@@ -117,7 +117,6 @@ class ArrayStack(object):
         # note using end of list as top of stack
         popped_item = self.list[-1]
         self.list.pop()
-
         return popped_item  # item just deleted from stack
 
 

@@ -32,7 +32,7 @@ class LinkedQueue(object):
         """
         Insert the given item at the back of this queue.
         Running time: O(1) – b/c our linked list has a tail pointer so
-        appending is constant [TODO]
+        appending is constant
         """
         self.list.append(item)  # use linked list append method to add to end
 
@@ -46,11 +46,13 @@ class LinkedQueue(object):
     def dequeue(self):
         """Remove and return the item at the front of this queue,
         or raise ValueError if this queue is empty.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) – b/c linked list class has a
+        head pointer we can easily remove first item
+        """
         # check if queue is empty and throw error
         if self.list.is_empty():
             raise ValueError('Queue is empty')
- 
+
         # grab value of head in linked list
         # and then use linked list delete method
         # on head node
@@ -84,8 +86,11 @@ class ArrayQueue(object):
         return len(self.list)  # return length of list
 
     def enqueue(self, item):
-        """Insert the given item at the back of this queue.
-        Running time: O(???) – Why? [TODO]"""
+        """
+        Insert the given item at the back of this queue.
+        Running time: O(1) – appending to end of list
+        is constant time
+        """
         # append item to end of list
         self.list.append(item)
 
@@ -96,15 +101,20 @@ class ArrayQueue(object):
         return self.list[0] if not self.is_empty() else None
 
     def dequeue(self):
-        """Remove and return the item at the front of this queue,
+        """
+        Remove and return the item at the front of this queue,
         or raise ValueError if this queue is empty.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(n) – b/c popping the first element
+        is list requires every element after it to shift left
+        """
         # check that queue is not empty
         if not self.is_empty():
             # grab value of item to be popped from queue
             popped_item = self.list[0]
             self.list.pop(0)  # remove item
+
             return popped_item
+
         else:  # queue is empty
             raise ValueError('cannot dequeue because queue is empty')
 

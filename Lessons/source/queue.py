@@ -182,8 +182,10 @@ class Deque:
         popped_item = self.list.tail
 
         # remove item from right side
-        # NOTE: this could be much better with doubly linked list
+        # TODO: this could be much better with doubly linked list
         # currently O(n)
         self.list.delete(popped_item)
+
+        return popped_item  # return value of deleted item
 
 

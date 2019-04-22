@@ -15,7 +15,7 @@
 
 ## Learning Objectives (5 min)
 
-**NOTE: Fill in with the appropriate items**
+
 
 By this end of this lesson, students should be able to...
 
@@ -26,6 +26,10 @@ By this end of this lesson, students should be able to...
 - Compare [abstract data types] and [concrete data structures][data structures]
 - Abstract data types: [list], [stack], [queue], [deque (double-ended queue)][deque]
 - Concrete data structures: [array], [dynamic array (resizable array, vector)][dynamic array], [linked list]
+
+
+
+
 
 ## Resources
 - Review Make School's [stack and queue slides]

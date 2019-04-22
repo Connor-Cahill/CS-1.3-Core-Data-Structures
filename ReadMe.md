@@ -7,7 +7,7 @@ This course explores the foundations of computer science including discrete math
 ### Why you should know this
 Data structures are the building blocks of computer science. It's the foundation that allows engineers to store and manipulate data. Once you have a place to store the data, if you need to find data or sort it in a specific way, you'll need search algorithms in order to do that.
 
-Implementations of these concepts are how some of the largest tech companies in the world were built. Displaying relevant search results and finding friends and peers on social networks would be impossible without these core concepts. They're also **the most common topics for software engineering interviews**, and leveling up your knowledge on these topics is required to nail that technical interview! 
+Implementations of these concepts are how some of the largest tech companies in the world were built. Displaying relevant search results and finding friends and peers on social networks would be impossible without these core concepts. They're also **the most common topics for software engineering interviews**, and leveling up your knowledge on these topics is required to nail that technical interview!
 
 ## Course Specifics
 
@@ -36,7 +36,6 @@ Students by the end of the course will be able to ...
 
 ## Schedule
 
-**NOTE:** Update once schedule is in place
 
 **Course Dates:** Monday, April 1 – Wednesday, May 15, 2019 (7 weeks)
 
@@ -76,7 +75,7 @@ Please follow [these instructions](Setup.md) exactly to set up your fork of this
 
 - **Good Example:** 40+ commits throughout the length of the course, looking for a healthy spattering of commits each week (such as 3-5 per day).
 - **Bad Example:** 10 commits on one day during the course and no others. Students who do this will be at severe risk of not passing the class.
-- **Unacceptable Example:** 2 commits the day before a project is due. Students who do this should not expect to pass the class. 
+- **Unacceptable Example:** 2 commits the day before a project is due. Students who do this should not expect to pass the class.
 
 #### Why are we doing this?
 
@@ -99,7 +98,7 @@ Through this requirement, we hope to encourage you to think about projects with 
 
 To pass this course you must meet the following requirements:
 
-- Complete all required tutorials 
+- Complete all required tutorials
 - Pass all projects according to the associated project rubric
 - Pass the final summative assessment >=75%
 - Actively participate in class and abide by the attendance policy
@@ -112,7 +111,7 @@ Attendance requirements for scheduled sessions are:
 - No more than two no call no shows per term in any scheduled session.
 - No more than four excused absences per term in any scheduled session.
 
-Failure to meet these requirements will result in a PIP (Participation Improvement Plan).  Failure to improve after the PIP is cause for not being allowed to continue at Make School. 
+Failure to meet these requirements will result in a PIP (Participation Improvement Plan).  Failure to improve after the PIP is cause for not being allowed to continue at Make School.
 
 
 ## Make School Course Policies

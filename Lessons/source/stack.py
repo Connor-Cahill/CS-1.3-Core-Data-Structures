@@ -29,8 +29,10 @@ class LinkedStack(object):
         return self.list.length()
 
     def push(self, item):
-        """Insert the given item on the top of this stack.
-        Running time: O(???) – Why? [TODO]"""
+        """
+        Insert the given item on the top of this stack.
+        Running time: O(1) b/c we are just prepending to linkedlist
+        """
         # use linked list prepend method to put on top of stack
         self.list.prepend(item)
 
@@ -41,17 +43,22 @@ class LinkedStack(object):
         return self.list.head.data if not self.list.is_empty() else None
 
     def pop(self):
-        """Remove and return the item on the top of this stack,
+        """
+        Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) – we can just remove head from linkedlist
+        which is constant time
+        """
         # check that stack is not empty
         if not self.list.is_empty():
             # grab top item on stack (item to be removed)
             popped_item = self.list.head
+
             # use linkedlist delete method to remove item
             self.list.delete(popped_item.data)
             return popped_item.data
-        else:  # stack is empty, raise value error
+
+        else: # stack is empty, raise value error
             raise ValueError('cannot pop from stack because stack is empty')
 
 
@@ -105,6 +112,7 @@ class ArrayStack(object):
         # check if stack is empty and raise error
         if self.is_empty():
             raise ValueError('cannot pop because stack is empty')
+
         # grab value of item at end of list and pop it
         # note using end of list as top of stack
         popped_item = self.list[-1]

@@ -79,5 +79,4 @@ def main():
         print('  checks if each argument given is a palindrome')
 
 
-if __name__ == '__main__':
-    main()
+

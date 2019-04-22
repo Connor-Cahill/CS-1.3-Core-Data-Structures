@@ -34,7 +34,9 @@ class HashTable(object):
 
     def keys(self):
         """Return a list of all keys in this hash table.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case running time: O(1) we have to iterate
+        over every item in hashtable
+        """
         # Collect all keys in each of the buckets
         all_keys = []
         for bucket in self.buckets:
@@ -44,7 +46,9 @@ class HashTable(object):
 
     def values(self):
         """Return a list of all values in this hash table.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case running time: O(n) b/c it requires iterating
+       over every entry in hashtable 
+        """
         # Collect all values in each of the buckets
         all_values = []
         for bucket in self.buckets:
@@ -53,8 +57,11 @@ class HashTable(object):
         return all_values
 
     def items(self):
-        """Return a list of all entries (key-value pairs) in this hash table.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        """
+        Return a list of all entries (key-value pairs) in this hash table.
+        Best and worst case running time: O(n)requires to iterate over every
+        entry in the hashtable.
+        """
         # Collect all pairs of key-value entries in each of the buckets
         all_items = []
         for bucket in self.buckets:
@@ -62,15 +69,20 @@ class HashTable(object):
         return all_items
 
     def length(self):
-        """Return the number of key-value entries by traversing its buckets.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        """
+        Return the number of key-value entries by traversing its buckets.
+        Best and worst case running time: O(1) there is a size proptery in
+        hashtable class that can be returned in constant time
+        """
         # returns size counter for hashtable class (counts number of entries)
         return self.size
 
     def contains(self, key):
-        """Return True if this hash table contains the given key, or False.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        """
+        Return True if this hash table contains the given key, or False.
+        Best case running time: O(1) constant time to read from hashtable
+        Worst case running time: O(n) lots of collisions
+        """
         # Find the bucket the given key belongs in
         index = self._bucket_index(key)
         bucket = self.buckets[index]
@@ -79,9 +91,11 @@ class HashTable(object):
         return entry is not None  # True or False
 
     def get(self, key):
-        """Return the value associated with the given key, or raise KeyError.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        """
+        Return the value associated with the given key, or raise KeyError.
+        Best case running time: O(1) constant time to read from hashtable
+        Worst case running time: O(n) lots of collisions
+        """
         # Find the bucket the given key belongs in
         index = self._bucket_index(key)
         bucket = self.buckets[index]
@@ -96,9 +110,12 @@ class HashTable(object):
             raise KeyError('Key not found: {}'.format(key))
 
     def set(self, key, value):
-        """Insert or update the given key with its associated value.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        """
+        Insert or update the given key with its associated value.
+        Best case running time: O(1) constant time adding to normal hashtable
+        just have to hash key and put in bucket
+        Worst case running time: O(n)lots of collisions
+        """
         # Find the bucket the given key belongs in
         index = self._bucket_index(key)
         bucket = self.buckets[index]
@@ -119,9 +136,12 @@ class HashTable(object):
             self._resize()
 
     def delete(self, key):
-        """Delete the given key and its associated value, or raise KeyError.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        """
+        Delete the given key and its associated value, or raise KeyError.
+        Best case running time: O(1) b/c hash func and key can get us to bucket
+        Worst case running time: O(n) lots of collisions and need to iterate
+        through linked list
+        """
         # Find the bucket the given key belongs in
         index = self._bucket_index(key)
         bucket = self.buckets[index]
@@ -135,11 +155,14 @@ class HashTable(object):
             raise KeyError('Key not found: {}'.format(key))
 
     def _resize(self, new_size=None):
-        """Resize this hash table's buckets and rehash all key-value entries.
+        """
+        Resize this hash table's buckets and rehash all key-value entries.
         Should be called automatically when load factor exceeds a threshold
         such as 0.75 after an insertion (when set is called with a new key).
-        Best and worst case running time: ??? under what conditions? [TODO]
-        Best and worst case space usage: ??? what uses this memory? [TODO]"""
+        Best and worst case running time: O(n) iterate through all items to
+        rehash all keys and set items
+        Best and worst case space usage: O(n) b/c every entry has to be stored
+        """
         # If unspecified, choose new size dynamically based on current size
         if new_size is None:
             new_size = len(self.buckets) * 2  # Double size

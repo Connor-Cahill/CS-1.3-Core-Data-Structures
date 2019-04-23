@@ -17,6 +17,13 @@ class Set:
             for element in elements:
                 self.add(element)
 
+    def __str__(self):
+        """ prints string representation of self"""
+        print('SET({})'.format(self.elements()))
+
+    def __repre__(self):
+        """ prints self """
+        print('SET({})'.format(self.elements()))
 
     def contains(self, element):
         """
@@ -56,6 +63,14 @@ class Set:
         # raises KeyError if element is not present
         self.data.delete(element)
 
+    def elements(self):
+        """
+        Returns list of elements in set
+        to be iterated over
+        """
+        # returning keys from hashtable
+        # b/c key == value in set
+        return self.data.keys()
 
     def length(self):
         """returns the length of set"""
@@ -73,12 +88,57 @@ class Set:
         union_set = Set()  # set to be returned
         # iterate over the 2 sets
         # adding every element to return set
-        for element in self.data.keys():
+        for element in self.elements():
             union_set.add(element)
-        for element in other_set.data.keys():
+        for element in other_set.elements():
             union_set.add(element)
 
         return union_set
+
+    def intersection(self, other_set):
+        """
+        Given another set as an argument will return
+        all overlapping values from both as a new set
+        O(n) ---> b/c iterating over every item in the larger
+        set to see which to add to return set
+        """
+        intersection_set = Set()  # set to be returned
+        # large is the larger of the 2 sets
+        # this way we can only iterate over 1 set
+        large = self if self.length() >= other_set.length() else other_set
+        small = self if self.length() < other_set.length() else other_set
+
+        # iterate over the larger set and check
+        # what values it has in common with smaller set
+        # if a value overlaps add it to return set
+        # NOTE: keys method is from hashtable class
+        for element in large.elements():
+            if small.contains(element):  # Both contain element!
+                intersection_set.add(element)
+
+        return intersection_set
+
+    def is_subset(self, other_set):
+        """
+        Given another set as a argument returns a bool
+        on wheter other_set is a subset of this set
+        O(n) ---> iterate over every item in other set
+        to see if they are all in this set
+        """
+        # if other set is larger than this
+        # set it cannot be a subset
+        if other_set.length() > self.length():
+            return False
+
+        # iterate over smaller set
+        for element in other_set.elements():
+            if not self.contains(element):
+                return False
+
+        # if loop is completed every element
+        # from other_set was in this set
+        # it is a subset
+        return True
 
 
 

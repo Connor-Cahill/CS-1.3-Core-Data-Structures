@@ -44,7 +44,6 @@ class Set:
 
         # element is not in set
         # use hashtable add method
-        # set k, v as same TODO: decide to have k == v or k, True
         self.data.set(element, element)
 
     def remove(self, element):
@@ -62,3 +61,24 @@ class Set:
         """returns the length of set"""
         # uses the hashtables lenth method
         return self.data.length()
+
+    def union(self, other_set):
+        """
+        Given another set as argument will return
+        a new set that is the union of the 2
+        (union meaning all elements in both sets)
+        O(n + m) ---> b/c it requires to iterate over
+        every element in both sets
+        """
+        union_set = Set()  # set to be returned
+        # iterate over the 2 sets
+        # adding every element to return set
+        for element in self.data.keys():
+            union_set.add(element)
+        for element in other_set.data.keys():
+            union_set.add(element)
+
+        return union_set
+
+
+

@@ -1,6 +1,6 @@
 #!python
 
-from hashtable import Hashtable
+from hashtable import HashTable
 
 class Set:
     def __init__(self, elements=None):
@@ -9,7 +9,7 @@ class Set:
         with option to pass in items as array
         """
         # NOTE: we can just use the hashtables size counter
-        self.data = Hashtable()  # using hashtable to store sets data
+        self.data = HashTable()  # using hashtable to store sets data
 
         # if elements were passed through
         # fill up our set
@@ -34,7 +34,7 @@ class Set:
         """
         # use hashtables contains method which
         # returns a bool
-        return self.data.contains(item)
+        return self.data.contains(element)
 
     def add(self, element):
         """

@@ -178,8 +178,8 @@ class HashTable(object):
         self.__init__(new_size)
 
         # Insert each key-value entry into the new list of buckets,
-        for item in items:
-            self.set(item[0], item[1])
+        for key, value in items:
+            self.set(key, value)
         return self  # return updated self
 
 

@@ -85,15 +85,11 @@ class Set:
         O(n + m) ---> b/c it requires to iterate over
         every element in both sets
         """
-        union_set = Set()  # set to be returned
         # iterate over the 2 sets
         # adding every element to return set
-        for element in self.elements():
-            union_set.add(element)
-        for element in other_set.elements():
-            union_set.add(element)
-
-        return union_set
+        union = [item for item in self.elements()]
+        union.extend(item for item in other_set.elements())
+        return Set(union)
 
     def intersection(self, other_set):
         """
@@ -156,6 +152,4 @@ class Set:
         # from other_set was in this set
         # it is a subset
         return True
-
-
 

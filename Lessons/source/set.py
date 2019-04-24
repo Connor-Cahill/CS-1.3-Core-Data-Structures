@@ -128,7 +128,7 @@ class Set:
         # iterate of this set and add
         # all elements not in other set
         # to our return set
-        for element. in self.elements():
+        for element in self.elements():
             if not other_set.contains(element):
                 diff_set.add(element)
 

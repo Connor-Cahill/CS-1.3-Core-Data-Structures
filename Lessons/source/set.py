@@ -118,6 +118,23 @@ class Set:
 
         return intersection_set
 
+    def difference(self, other_set):
+        """
+        Returns a set of elements in this set but not the other_set
+
+        """
+        # set to be returned
+        diff_set = Set()
+        # iterate of this set and add
+        # all elements not in other set
+        # to our return set
+        for element. in self.elements():
+            if not other_set.contains(element):
+                diff_set.add(element)
+
+        return diff_set
+
+
     def is_subset(self, other_set):
         """
         Given another set as a argument returns a bool

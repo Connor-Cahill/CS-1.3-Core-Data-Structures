@@ -14,8 +14,8 @@ class SetTest(unittest.TestCase):
         assert set.data.length() == 3
 
     def test_init_with_duplicate(self):
-        with self.assertRaises(ValueError):
-            set = Set(['bob', 'bob', 'carl'])  # duplicates! not good
+        set = Set(['bob', 'bob', 'carl'])  # duplicates! not good
+        assert set.length() == 2  # should't add repeating value
 
     # should return True
     def test_contains_is_true(self):
@@ -27,6 +27,11 @@ class SetTest(unittest.TestCase):
         set = Set(['bob', 'jane', 'colin', 'dan'])
         assert set.length() == 4
         assert set.contains('connor') is False  # connor not in set
+
+    def test_empty_contains(self):
+        set = Set(['bob', 'jane', 'colin'])
+        assert set.length() == 3
+        assert set.contains('') is False
 
     def test_add(self):
         set = Set()
@@ -43,8 +48,8 @@ class SetTest(unittest.TestCase):
         set = Set()
         set.add('bob')
         assert set.length() == 1
-        with self.assertRaises(ValueError):
-            set.add('bob')  # adding duplicate, should be error
+        set.add('bob')
+        assert set.length() == 1  # should't add repeating value
 
     def test_remove(self):
         set = Set(['bob', 'joe', 'jane', 'donna'])
@@ -58,6 +63,28 @@ class SetTest(unittest.TestCase):
         assert set.length() == 5
         with self.assertRaises(KeyError):
             set.remove('connor')  # connor is not in set
+
+    def test_union(self):
+        set = Set(['bob', 'jane', 'smith', 'hi'])
+        other_set = Set(['jimmy', 'jim', 'kid'])
+        assert set.union(other_set).length() == 7  # the union should have 7 elements
+
+    def test_union_duplicates(self):
+        set = Set(['bob', 'jane', 'smith', 'hi'])
+        other_set = Set(['jane', 'jim', 'kid'])
+        assert set.union(other_set).length() == 6  # because repeating element
+
+    def test_intersect(self):
+        set = Set(['kid', 'jane', 'smith', 'hi'])
+        other_set = Set(['jane', 'jim', 'kid'])
+        assert set.intersection(other_set).length() == 2  # 2 intersecting values
+
+    def test_intersect_none(self):
+        set = Set(['bob', 'tom', 'smith', 'hi'])
+        other_set = Set(['jane', 'jim', 'kid'])
+        assert set.intersection(other_set).length() == 0  # no intersecting elements
+
+
 
 if __name__ == '__main__':
     unittest.main()

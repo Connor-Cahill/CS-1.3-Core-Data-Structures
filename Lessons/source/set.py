@@ -40,14 +40,14 @@ class Set:
         """
         Given an  element as arg will add to
         set IF element is not already in set
-        in which case will raise ValueError
+        in which case will break method early
         O(1)* ---> b/c hashtables are constant
         time to add to unless a resize is necessary
         """
         # check if element is already
-        # present in set and raise ValueError
+        # present in set and return out of method early
         if self.data.contains(element):
-            raise ValueError('Element: {} already in set. No duplicates allowed.'.format(element))
+            return
 
         # element is not in set
         # use hashtable add method

@@ -138,18 +138,18 @@ class Set:
     def is_subset(self, other_set):
         """
         Given another set as a argument returns a bool
-        on wheter other_set is a subset of this set
+        on whether this set is a subset of other_set
         O(n) ---> iterate over every item in other set
         to see if they are all in this set
         """
-        # if other set is larger than this
-        # set it cannot be a subset
-        if other_set.length() > self.length():
+        # if this set is larger than other set
+        # it cannot be a subset
+        if other_set.length() < self.length():
             return False
 
         # iterate over smaller set
-        for element in other_set.elements():
-            if not self.contains(element):
+        for element in self.elements():
+            if not other_set.contains(element):
                 return False
 
         # if loop is completed every element

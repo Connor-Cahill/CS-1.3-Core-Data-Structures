@@ -84,6 +84,25 @@ class SetTest(unittest.TestCase):
         other_set = Set(['jane', 'jim', 'kid'])
         assert set.intersection(other_set).length() == 0  # no intersecting elements
 
+    def test_difference(self):
+        set = Set(['bob', 'tom', 'smith', 'hi'])
+        other_set = Set(['jane', 'bob', 'jim', 'kid'])
+        assert set.difference(other_set).length() == 3
+
+    def test_difference_no_diff(self):
+        set = Set(['bob', 'tom', 'smith', 'hi'])
+        other_set = Set(['tom', 'bob', 'smith', 'hi'])
+        assert set.difference(other_set).length() == 0  # no difference 
+
+    def test_is_subset_true(self):
+        set = Set(['bob', 'tom', 'smith', 'hi', 'football', 'baseball', 'something'])
+        other_set = Set(['tom', 'bob', 'smith', 'hi'])
+        assert other_set.is_subset(set) is True  # set should be a subset
+
+    def test_is_subset_false(self):
+        set = Set(['hike', 'tom', 'smith', 'hi'])
+        other_set = Set(['tom', 'bob', 'smith', 'hi', 'hope, fun'])
+        assert set.is_subset(other_set) is False
 
 
 if __name__ == '__main__':

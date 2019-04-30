@@ -47,7 +47,7 @@ class HashTable(object):
     def values(self):
         """Return a list of all values in this hash table.
         Best and worst case running time: O(n) b/c it requires iterating
-       over every entry in hashtable 
+       over every entry in hashtable
         """
         # Collect all values in each of the buckets
         all_values = []
@@ -166,16 +166,20 @@ class HashTable(object):
         # If unspecified, choose new size dynamically based on current size
         if new_size is None:
             new_size = len(self.buckets) * 2  # Double size
+
         # Option to reduce size if buckets are sparsely filled(low load factor)
         elif new_size is 0:
             new_size = len(self.buckets) / 2  # Half size
+
         # Get a list to temporarily hold all current key-value entries
         items = self.items()
+
         # Create a new list of new_size total empty linked list buckets
         self.__init__(new_size)
+
         # Insert each key-value entry into the new list of buckets,
-        for item in items:
-            self.set(item[0], item[1])
+        for key, value in items:
+            self.set(key, value)
         return self  # return updated self
 
 

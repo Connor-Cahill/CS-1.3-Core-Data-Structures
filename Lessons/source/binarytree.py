@@ -21,6 +21,14 @@ class BinaryTreeNode(object):
         """Return True if this node is a branch (has at least one child)."""
         return self.right is not None or self.left is not None
 
+    # this will be used to help with our delete method
+    # for the binary search tree
+    def two_children(self):
+        """
+        Return True if this node has 2 children 
+        """
+        return self.right is not None and self.left is not None
+
     def height(self):
         """
         Return the height of this node (the number of edges on the longest

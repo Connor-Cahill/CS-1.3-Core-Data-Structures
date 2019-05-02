@@ -243,12 +243,16 @@ class BinarySearchTree(object):
         Start at the given node and visit each node with the given function.
         TODO: Running time: ??? Why and under what conditions?
         TODO: Memory usage: ??? Why and under what conditions?"""
-        # TODO: Traverse left subtree, if it exists
-        ...
-        # TODO: Visit this node's data with given function
-        ...
-        # TODO: Traverse right subtree, if it exists
-        ...
+        # Traverse left subtree, if it exists
+        if node.left is not None:
+            return self._traverse_in_order_recursive(node.left, visit)
+
+        # Visit this node's data with given function
+        visit(node) 
+
+        # Traverse right subtree, if it exists
+        if node.right is not None:
+            return self._traverse_in_order_recursive(node.right, visit)
 
     def _traverse_in_order_iterative(self, node, visit):
         """Traverse this binary tree with iterative in-order traversal (DFS).

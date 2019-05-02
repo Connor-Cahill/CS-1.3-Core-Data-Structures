@@ -236,7 +236,8 @@ class BinarySearchTree(object):
         # return value error
         node = self._find_node_recursive(item, self.root)
         if node is None:
-            raise ValueError(f'Item: {item} not in tree.')
+            raise ValueError("Item: {} not in tree.".format(item))
+
         # check if node is a leaf
         # if True find the parent of the node and
         # figure out if it is left child or right child
@@ -246,7 +247,32 @@ class BinarySearchTree(object):
                 parent.left = None
             else:
                 parent.right = None
-        elif node.two
+
+        # check if case where the node has 2 children
+        # then find successor to replace with and shift pointers
+        elif node.two_children():
+            successor = self._find_successor(node)
+            s_parent = self._find_parent_recursive(successor.data, node)
+            # replace data w/ successor
+            node.data = successor.data
+            # deletes the successor node
+            s_parent.left = successor.right
+
+        # check case branch has one child
+        # just skip over node and grab child
+        elif node.is_branch():
+            parent = self._find_parent_node_recursive(item, self.root)
+            # check what side child the node is to parent
+            # and skip over
+            if parent.left == node:
+                # assign parent to nodes child
+                parent.left = node.right if node.right is not None else node.left
+            elif parent.right == node:
+                parent.right = node.right if node.right is not None else node.right
+
+        # decrement size counter
+        self.size -= 1
+
 
     def _find_successor(self, start_node):
         """

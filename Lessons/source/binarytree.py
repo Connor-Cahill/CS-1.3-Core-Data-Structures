@@ -25,6 +25,9 @@ class BinaryTreeNode(object):
         """Return True if this node is a branch (has at least one child)."""
         return self.right is not None or self.left is not None
 
+    def two_children(self):
+        """Returns True if node has 2 children"""
+
     def height(self):
         """
         Return the height of this node (the number of edges on the longest
@@ -229,9 +232,38 @@ class BinarySearchTree(object):
         """Remove given item from this tree, if present, or raise ValueError.
         TODO: Best case running time: ??? under what conditions?
         TODO: Worst case running time: ??? under what conditions?"""
-        # TODO: Use helper methods and break this algorithm down into 3 cases
-        # based on how many children the node containing the given item has and
-        # implement new helper methods for subtasks of the more complex cases
+        # see if node exists in tree and grab value or 
+        # return value error
+        node = self._find_node_recursive(item, self.root)
+        if node is None:
+            raise ValueError(f'Item: {item} not in tree.')
+        # check if node is a leaf
+        # if True find the parent of the node and
+        # figure out if it is left child or right child
+        elif node.is_leaf():
+            parent = self._find_parent_recursive(item, self.root)
+            if node == parent.left:
+                parent.left = None
+            else:
+                parent.right = None
+        elif node.two
+
+    def _find_successor(self, start_node):
+        """
+        Returns successor node in binary tree
+        """
+        node = start_node
+        # if right child is there
+        # traverse right down tree
+        if node.right is not None:
+            node = node.right
+        # while there is left children we traverse
+        # left down subtree
+        while node.left is not None:
+            node = node.left
+        return node
+
+
 
     def items_in_order(self):
         """Return an in-order list of all items in this binary search tree."""

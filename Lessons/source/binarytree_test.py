@@ -107,9 +107,11 @@ class BinarySearchTreeTest(unittest.TestCase):
         tree.delete(7)
         assert tree.size == 6
         assert tree.search(7) == None
+        assert tree.items_in_order() == [1, 3, 4, 6, 20, 34]
+        tree.delete(20)
+        assert tree.size == 5
+        assert tree.items_in_order() == [1, 3, 4, 6, 34]
 
-    def test_delete_with_strings(self):
-        pass
 
     def test_size(self):
         tree = BinarySearchTree()

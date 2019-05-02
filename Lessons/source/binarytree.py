@@ -21,14 +21,6 @@ class BinaryTreeNode(object):
         """Return True if this node is a branch (has at least one child)."""
         return self.right is not None or self.left is not None
 
-    # this will be used to help with our delete method
-    # for the binary search tree
-    def two_children(self):
-        """
-        Return True if this node has 2 children 
-        """
-        return self.right is not None and self.left is not None
-
     def height(self):
         """
         Return the height of this node (the number of edges on the longest
@@ -283,12 +275,15 @@ class BinarySearchTree(object):
         Start at the given node and visit each node with the given function.
         TODO: Running time: ??? Why and under what conditions?
         TODO: Memory usage: ??? Why and under what conditions?"""
-        # TODO: Visit this node's data with given function
-        ...
-        # TODO: Traverse left subtree, if it exists
-        ...
-        # TODO: Traverse right subtree, if it exists
-        ...
+        # Visit this node's data with given function
+        if node is not None:
+            visit(node)
+        # Traverse left subtree, if it exists
+        if node.left is not None:
+            return self._traverse_pre_order_recursive(node.left, visit)
+        # Traverse right subtree, if it exists
+        if node.right is not None:
+            return self._traverse_pre_order_recursive(node.left, visit)
 
     def _traverse_pre_order_iterative(self, node, visit):
         """Traverse this binary tree with iterative pre-order traversal (DFS).

@@ -100,6 +100,17 @@ class BinarySearchTreeTest(unittest.TestCase):
         assert tree.size == 3
         assert tree.is_empty() is False
 
+    def test_delete_ints(self):
+        tree = BinarySearchTree([6, 4, 7, 3, 1, 20, 34])
+        assert tree.root.data == 6
+        assert tree.size == 7
+        tree.delete(7)
+        assert tree.size == 6
+        assert tree.search(7) == None
+
+    def test_delete_with_strings(self):
+        pass
+
     def test_size(self):
         tree = BinarySearchTree()
         assert tree.size == 0

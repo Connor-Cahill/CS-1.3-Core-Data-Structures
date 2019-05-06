@@ -310,7 +310,8 @@ class BinarySearchTree(object):
         items = []
         if not self.is_empty():
             # Traverse tree in-order from root, appending each node's item
-            self._traverse_in_order_recursive(self.root, items.append)
+            # self._traverse_in_order_recursive(self.root, items.append)
+            self._traverse_in_order_iterative(self.root, items.append)
         # Return in-order list of all items in tree
         return items
 
@@ -339,18 +340,31 @@ class BinarySearchTree(object):
         """
         # stack for holding horizon
         stack = LinkedStack()
+        # tells when we are done traversing
+        done = False
+        # set node as root node to start
         node = self.root
-        # push the root node onto the stack
-        stack.push(node)
-        while node is not None:
-            while node.left is not None:
+        # traverse nodes while stack is not empty
+        while not done:
+            # traverse down left side of tree
+            # appending nodes to stack
+            if node is not None:
+                stack.push(node)
                 node = node.left
-                stack.push(node)
-            node = stack.pop()
-            visit(node)
-            while node.right is not None:
-                node = node.right
-                stack.push(node)
+
+            # if node is none time to go grab
+            # from stack
+            else:
+                # if stack is not empty pop and grab
+                # top item in stack
+                if not stack.is_empty():
+                    node = stack.pop()
+                    visit(node.data)
+
+                    node = node.right
+                else:
+                    done = True
+
 
     def items_pre_order(self):
         """Return a pre-order list of all items in this binary search tree."""
@@ -382,7 +396,9 @@ class BinarySearchTree(object):
         TODO: Running time: O(n) we visit every node in the tree
         TODO: Memory usage: O(n) because we are creating a stack
         """
+        stack
         # TODO: Traverse pre-order without using recursion (stretch challenge)
+
 
     def items_post_order(self):
         """Return a post-order list of all items in this binary search tree."""

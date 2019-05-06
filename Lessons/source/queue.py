@@ -41,7 +41,7 @@ class LinkedQueue(object):
         or None if this queue is empty."""
         # returns the head of list and uses linked list is_empty method to
         # check if list is empty, if it is returns None
-        return self.list.head if not self.list.is_empty() else None
+        return self.list.head.data if not self.list.is_empty() else None
 
     def dequeue(self):
         """Remove and return the item at the front of this queue,

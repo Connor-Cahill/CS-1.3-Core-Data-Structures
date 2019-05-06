@@ -342,15 +342,15 @@ class BinarySearchTree(object):
         stack = LinkedStack()
         # tells when we are done traversing
         done = False
-        # set node as root node to start
-        node = self.root
+        # set node as start node to start
+        current = node
         # traverse nodes while stack is not empty
         while not done:
             # traverse down left side of tree
             # appending nodes to stack
-            if node is not None:
-                stack.push(node)
-                node = node.left
+            if current is not None:
+                stack.push(current)
+                current = current.left
 
             # if node is none time to go grab
             # from stack
@@ -358,11 +358,13 @@ class BinarySearchTree(object):
                 # if stack is not empty pop and grab
                 # top item in stack
                 if not stack.is_empty():
-                    node = stack.pop()
-                    visit(node.data)
-
-                    node = node.right
+                    current = stack.pop()
+                    # visit the node
+                    visit(current.data)
+                    # grab the right node (None is fine)
+                    current = current.right
                 else:
+                    # All done!
                     done = True
 
 
@@ -371,7 +373,8 @@ class BinarySearchTree(object):
         items = []
         if not self.is_empty():
             # Traverse tree pre-order from root, appending each node's item
-            self._traverse_pre_order_recursive(self.root, items.append)
+            # self._traverse_pre_order_recursive(self.root, items.append)
+            self._traverse_pre_order_iterative(self.root, items.append)
         # Return pre-order list of all items in tree
         return items
 
@@ -396,8 +399,28 @@ class BinarySearchTree(object):
         TODO: Running time: O(n) we visit every node in the tree
         TODO: Memory usage: O(n) because we are creating a stack
         """
-        stack
-        # TODO: Traverse pre-order without using recursion (stretch challenge)
+        # stack to use to store nodes in order
+        stack = LinkedStack()
+        # set current to the starting node
+        current = node
+        # load starting node into stack
+        stack.push(current)
+        # traverse until stack is empty
+        while not stack.is_empty():
+            # pop and visit top node in stack
+            current = stack.pop()
+            visit(current.data)
+
+            # NOTE: right is first because we are using stack
+            # so right child will be under left child
+            # if right child is present add to stack
+            if current.right is not None:
+                stack.push(current.right)
+
+            # if left child is present add to stack
+            if current.left is not None:
+                stack.push(current.left)
+
 
 
     def items_post_order(self):

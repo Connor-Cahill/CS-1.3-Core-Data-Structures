@@ -25,6 +25,10 @@ class Set:
         """ prints self """
         print('SET({})'.format(self.elements()))
 
+    @property
+    def size(self):
+        return self.data.size
+
     def contains(self, element):
         """
         Given an element will return true or false

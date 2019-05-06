@@ -310,8 +310,8 @@ class BinarySearchTree(object):
         items = []
         if not self.is_empty():
             # Traverse tree in-order from root, appending each node's item
-            # self._traverse_in_order_recursive(self.root, items.append)
-            self._traverse_in_order_iterative(self.root, items.append)
+            self._traverse_in_order_recursive(self.root, items.append)
+            # self._traverse_in_order_iterative(self.root, items.append)
         # Return in-order list of all items in tree
         return items
 
@@ -320,14 +320,17 @@ class BinarySearchTree(object):
         Traverse this binary tree with recursive in-order traversal (DFS).
         Start at the given node and visit each node with the given function.
         TODO: Running time: O(n) we visit every node in the tree
-        TODO: Memory usage: O(n) because we are creating a stack
+        TODO: Memory usage: O(log n) because we are creating a stack this
+        will have at most the same number nodes as height of tree from start node
         """
         # check to make sure there is a node
         if node is not None:
             # Traverse left subtree, if it exists
             self._traverse_in_order_recursive(node.left, visit)
+
             # Visit this node's data with given function
             visit(node.data)
+
             # Traverse right subtree, if it exists
             self._traverse_in_order_recursive(node.right, visit)
 
@@ -428,7 +431,8 @@ class BinarySearchTree(object):
         items = []
         if not self.is_empty():
             # Traverse tree post-order from root, appending each node's item
-            self._traverse_post_order_recursive(self.root, items.append)
+            # self._traverse_post_order_recursive(self.root, items.append)
+            self._traverse_level_order_iterative(self.root, items.append)
         # Return post-order list of all items in tree
         return items
 
@@ -455,7 +459,46 @@ class BinarySearchTree(object):
         TODO: Memory usage: O(n) we are creating a stack that will hold
         every node at some point
         """
-        # TODO: Traverse post-order without using recursion (stretch challenge)
+        # stack to keep track of nodes in order
+        stack = LinkedStack()
+        # done keeps track of if done traversing
+        # controls while loop
+        done = False
+        # set current node to starting node
+        current = node
+
+        # traverse nodes while stack is not empty
+        while not done:
+            # while current node is something
+            while current:
+                # if right child is there push onto stack
+                if current.right is not None:
+                    stack.push(current.right)
+                # push current node onto stack (after right children)
+                stack.push(current)
+                # grab left child of root
+                current = current.left
+            # Current node is none pop node from top of stack
+            current = stack.pop()
+
+            # check if the node has a right child that hasn't
+            # been checkout yet then push onto stack before current node
+            if root.right is not None and stack.peek() == current.right:
+                # pop child node from stack
+                stack.pop()
+                # push current node onto stack
+                stack.push(current)
+                current = current.right  # now set current to right child
+            else:
+                # visit the node
+                visit(current.data)
+                # set current node to None
+                current = None
+            if stack.is_empty():
+                # stack is empty we are done traversing
+                done = True
+
+
 
     def items_level_order(self):
         """

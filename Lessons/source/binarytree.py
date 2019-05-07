@@ -424,15 +424,13 @@ class BinarySearchTree(object):
             if current.left is not None:
                 stack.push(current.left)
 
-
-
     def items_post_order(self):
         """Return a post-order list of all items in this binary search tree."""
         items = []
         if not self.is_empty():
             # Traverse tree post-order from root, appending each node's item
             # self._traverse_post_order_recursive(self.root, items.append)
-            self._traverse_level_order_iterative(self.root, items.append)
+            self._traverse_post_order_iterative(self.root, items.append)
         # Return post-order list of all items in tree
         return items
 
@@ -441,7 +439,8 @@ class BinarySearchTree(object):
         Traverse this binary tree with recursive post-order traversal (DFS).
         Start at the given node and visit each node with the given function.
         TODO: Running time: O(n) because every node is visited
-        TODO: Memory usage: O(n) we are calling recursion on every node
+        TODO: Memory usage: O(log n) we are creating a stack that will hold
+        at most the same number of nodes as height in tree
         """
         # check that node is not none
         if node is not None:
@@ -456,8 +455,8 @@ class BinarySearchTree(object):
         """Traverse this binary tree with iterative post-order traversal (DFS).
         Start at the given node and visit each node with the given function.
         TODO: Running time: O(n) because every node is visited
-        TODO: Memory usage: O(n) we are creating a stack that will hold
-        every node at some point
+        TODO: Memory usage: O(log n) we are creating a stack that will hold
+        at most the same number of nodes as height in tree
         """
         # stack to keep track of nodes in order
         stack = LinkedStack()
@@ -466,7 +465,6 @@ class BinarySearchTree(object):
         done = False
         # set current node to starting node
         current = node
-
         # traverse nodes while stack is not empty
         while not done:
             # while current node is something
@@ -483,7 +481,7 @@ class BinarySearchTree(object):
 
             # check if the node has a right child that hasn't
             # been checkout yet then push onto stack before current node
-            if root.right is not None and stack.peek() == current.right:
+            if current.right is not None and stack.peek() == current.right:
                 # pop child node from stack
                 stack.pop()
                 # push current node onto stack

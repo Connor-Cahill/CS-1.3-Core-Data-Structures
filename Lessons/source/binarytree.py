@@ -515,8 +515,9 @@ class BinarySearchTree(object):
         """Traverse this binary tree with iterative level-order traversal (BFS).
         Start at the given node and visit each node with the given function.
         TODO: Running time: O(n) we visit every node in tree
-        TODO: Memory usage: O(n) we are creating a queue that every node
-        will populate at a certain time
+        TODO: Memory usage: O(n) because the most nodes that will
+        be in queue at a time are (n+1)/2 because of the furthest depth in
+        the tree. We drop all constants giving us O(n)
         """
         # Create queue to store nodes not yet traversed in level-order
         queue = LinkedQueue()

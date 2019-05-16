@@ -107,10 +107,7 @@ class TreeMap(object):
         # Find the entry with the given key in that bucket, if one exists
         entry = bucket.search(key)
         if entry is not None:  # Found
-            # Return the given key's associated value
-            assert isinstance(entry, tuple)
-            assert len(entry) == 2
-            return entry[1]
+            return entry
         else:  # Not found
             raise KeyError('Key not found: {}'.format(key))
 

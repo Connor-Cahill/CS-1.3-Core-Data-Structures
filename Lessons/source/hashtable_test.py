@@ -1,6 +1,7 @@
 #!python
 
 from hashtable import HashTable
+from treemap import TreeMap
 import unittest
 # Python 2 and 3 compatibility: unittest module renamed this assertion method
 if not hasattr(unittest.TestCase, 'assertCountEqual'):
@@ -10,13 +11,13 @@ if not hasattr(unittest.TestCase, 'assertCountEqual'):
 class HashTableTest(unittest.TestCase):
 
     def test_init(self):
-        ht = HashTable(4)
+        ht = TreeMap(4)
         assert len(ht.buckets) == 4
         assert ht.length() == 0
         assert ht.size == 0
 
     def test_keys(self):
-        ht = HashTable()
+        ht = TreeMap()
         assert ht.keys() == []
         ht.set('I', 1)
         assert ht.keys() == ['I']
@@ -26,7 +27,7 @@ class HashTableTest(unittest.TestCase):
         self.assertCountEqual(ht.keys(), ['I', 'V', 'X'])  # Ignore item order
 
     def test_values(self):
-        ht = HashTable()
+        ht = TreeMap()
         assert ht.values() == []
         ht.set('I', 1)
         assert ht.values() == [1]
@@ -36,7 +37,7 @@ class HashTableTest(unittest.TestCase):
         self.assertCountEqual(ht.values(), [1, 5, 10])  # Ignore item order
 
     def test_items(self):
-        ht = HashTable()
+        ht = TreeMap()
         assert ht.items() == []
         ht.set('I', 1)
         assert ht.items() == [('I', 1)]
@@ -46,7 +47,7 @@ class HashTableTest(unittest.TestCase):
         self.assertCountEqual(ht.items(), [('I', 1), ('V', 5), ('X', 10)])
 
     def test_length(self):
-        ht = HashTable()
+        ht = TreeMap()
         assert ht.length() == 0
         ht.set('I', 1)
         assert ht.length() == 1
@@ -56,7 +57,7 @@ class HashTableTest(unittest.TestCase):
         assert ht.length() == 3
 
     def test_size(self):
-        ht = HashTable()
+        ht = TreeMap()
         assert ht.size == 0
         ht.set('I', 1)
         assert ht.size == 1
@@ -66,7 +67,7 @@ class HashTableTest(unittest.TestCase):
         assert ht.size == 3
 
     def test_resize(self):
-        ht = HashTable(2)  # Set init_size to 2
+        ht = TreeMap(2)  # Set init_size to 2
         assert ht.size == 0
         assert len(ht.buckets) == 2
         assert ht.load_factor() == 0
@@ -88,7 +89,7 @@ class HashTableTest(unittest.TestCase):
         assert ht.load_factor() == 0.5
 
     def test_contains(self):
-        ht = HashTable()
+        ht = TreeMap()
         ht.set('I', 1)
         ht.set('V', 5)
         ht.set('X', 10)
@@ -98,7 +99,7 @@ class HashTableTest(unittest.TestCase):
         assert ht.contains('A') is False
 
     def test_set_and_get(self):
-        ht = HashTable()
+        ht = TreeMap()
         ht.set('I', 1)
         ht.set('V', 5)
         ht.set('X', 10)
@@ -111,7 +112,7 @@ class HashTableTest(unittest.TestCase):
             ht.get('A')  # Key does not exist
 
     def test_set_twice_and_get(self):
-        ht = HashTable()
+        ht = TreeMap()
         ht.set('I', 1)
         ht.set('V', 4)
         ht.set('X', 9)
@@ -126,7 +127,7 @@ class HashTableTest(unittest.TestCase):
         assert ht.size == 3  # Check size is not overcounting
 
     def test_delete(self):
-        ht = HashTable()
+        ht = TreeMap()
         ht.set('I', 1)
         ht.set('V', 5)
         ht.set('X', 10)

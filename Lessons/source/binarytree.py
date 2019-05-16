@@ -256,21 +256,14 @@ class BinarySearchTree(object):
         # if True find the parent of the node and
         # figure out if it is left child or right child
         elif node.is_leaf():
-            parent = self._find_parent_recursive(item, self.root)
-            if node == parent.left:
-                parent.left = None
-            else:
-                parent.right = None
-
-        # check if case where the node has 2 children
-        # then find successor to replace with and shift pointers
-        elif node.two_children():
-            successor = self._find_successor(node)
-            s_parent = self._find_parent_recursive(successor.data, node)
-            # replace data w/ successor
-            node.data = successor.data
-            # deletes the successor node
-            s_parent.left = successor.right
+            parent = self._find_parent_node_recursive(item, self.root)
+            if parent is not None:
+                if node == parent.left:
+                    parent.left = None
+                else:
+                    parent.right = None
+            else:  # removing root node
+                self.root = None
 
         # check case branch has one child
         # just skip over node and grab child

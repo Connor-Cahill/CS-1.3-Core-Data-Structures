@@ -54,6 +54,7 @@ class BinarySearchTreeMap(BinarySearchTree):
 
     def __init__(self, items=None):
         """Initialize this binary search tree and insert the given items."""
+        super().__init__(items=None)
         self.root = None
         self.size = 0
         if items is not None:
